@@ -1,13 +1,27 @@
 var gameSettings = {
   height: 600,
   width: 700,
-  nEnemies: 90,
+  nEnemies: 40,
   padding: 20
 };
+
+var time = 1500
 var score = {
   highScore: 0,
-  currentScore: 0
+  currentScore: 0,
+  collisions: 0
 };
+
+var updateScore = function(){
+  d3.select('#currentScore').text(score.currentScore);
+  d3.select('#highScore').text(score.highScore);
+  d3.select('#collisions').text(score.collisions);
+}
+
+$('#hard').click(function(){
+  gameSettings.nEnemies = 90090;
+  time = 45
+});
 
 var makeEnemies = function() {
   return _.range(0,gameSettings.nEnemies).map(function(itemId){
@@ -31,7 +45,9 @@ var enemy = board.selectAll('circle').data(enemies).enter().append('circle')
 .attr("fill",'teal')
 .attr('cx',function(i){return i.cX})
 .attr('id',function(i){return i.id})
-.attr('cy',function(i){return i.cY})
+.attr('cy',function(i){return i.cY});
+
+
 
 var drag = d3.behavior.drag()
     .on("drag", function(d){
@@ -40,18 +56,41 @@ var drag = d3.behavior.drag()
       .attr("cy", d.y = Math.max(10, Math.min(590, d3.event.y)));
 })
 
-var player = board.selectAll('player').data([1]).enter().append('circle')
-.attr('r',10)
+var player = board.selectAll('player').data([666]).enter().append('circle')
+.attr('r',13)
 .attr('fill','magenta')
 .attr('cy',200)
 .attr('cx',350)
 .attr('class','player').call(drag)
 
-
 setInterval(function(){
   enemy.transition().duration(1900).attr('cx',function(i){return Math.random() * 900})
   .attr('cy',function(){return Math.random() * 750})
-},1500);
+  .tween('custom', function(i,d){return function(t){
+    var enemy = d3.select(this);
+    var radiusSum =  parseFloat(enemy.attr('r')) + d3.select('.player').attr('r')
+    var hero = d3.select('.player');
+    var yDiff = parseFloat(enemy.attr('cy')) - parseFloat(hero.attr('cy'));
+    var xDiff = parseFloat(enemy.attr('cx')) - parseFloat(hero.attr('cx'));
+    var separation = Math.sqrt( Math.pow(xDiff,2) + Math.pow(yDiff,2) )
+    if(separation < 30){
+      if(score.highScore < score.currentScore){
+        score.highScore = 0 + score.currentScore;
+      }
+      score.collisions += 1
+      score.currentScore = 0;
+    }
+  }
+  });
+},time);
 
+function increaseScore(){
+  score.currentScore += 2
+  updateScore()
+}
 
+setInterval(function(){
+  increaseScore()
+},50)
+updateScore()
 
