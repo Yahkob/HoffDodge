@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' type='css' href='styles.css'> 
+    <link rel='stylesheet' type='css' href='styles.css'>
+    <link rel='stylesheet' type='css' href='bootstrap.min.css'>
   </head>
   <body>
-    <div class="scoreboard">
-      <!-- Modify the scoreboard when important events occur in your game! -->
-      <div class="high">High score: <span>0</span></div>
-      <div class="current">Current score: <span>0</span></div>
-      <div class="collisions">Collisions: <span>0</span></div>
+    <div class="container">
+      <div class="scoreboard">
+        <h4>Current Score: <span class="label label-info "id="currentScore">0</span></h4>
+        <h4>High Score:<span class="label label-info"id="highScore">0</span></h3>
+        <h5>Collisions: <span class="label label-danger"id="collisions">0</span></h6>
+      </div>
     </div>
     <script src="d3.js" charset="utf-8"></script>
-    <script src='vid.js'></script>
+    <script src="underscore.js"></script>
     <script src='watchout.js'></script>
   </body>
 </html>
