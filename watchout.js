@@ -4,7 +4,7 @@ $(document).ready(function(){
       bootbox.hideAll();
     }
     else{
-      window.location.href="http://tucsoncitizen.com/morgue/files/2007/01/l38304-1.jpg"
+      window.location.href="http://www.queenofdiy.com/stitchery/knitting-beginners-guide.html"
     }
   });
 });
@@ -57,22 +57,19 @@ var enemy = board.selectAll('image').data(enemies).enter().append('svg:image')
 .attr('height',90)
 .attr('y',function(i){return i.cY});
 
-
-
 var drag = d3.behavior.drag()
 .on("drag", function(d){
   d3.select(this)
-  .attr("x", d.x = Math.max(10, Math.min(690, d3.event.x)))
-  .attr("y", d.y = Math.max(10, Math.min(590, d3.event.y)));
+  .attr("cx", d.x = Math.max(10, Math.min(690, d3.event.x)))
+  .attr("cy", d.y = Math.max(10, Math.min(590, d3.event.y)));
 });
 
-var player = board.selectAll('player').data([666]).enter().append('svg:image')
-.attr("xlink:href", "Sale_1.png")
-.attr('width', 73)
-.attr('height', 120)
-.attr('y',200)
-.attr('x',350)
-.attr('class','player').call(drag);
+var player = board.selectAll('player').data([666]).enter().append('svg:circle')
+  .attr('fill', 'red')
+  .attr('r', 10)
+  .attr('cy', 300)
+  .attr('cx', 350)
+  .attr('class','player').call(drag);
 
 setInterval(function(){
   enemy.transition().duration(1900).attr('x',function(i){return Math.random() * 900})
@@ -81,8 +78,8 @@ setInterval(function(){
     return function(t){
       var enemy = d3.select(this);
       var hero = d3.select('.player');
-      var yDiff = parseFloat(enemy.attr('y')) - parseFloat(hero.attr('y'));
-      var xDiff = parseFloat(enemy.attr('x')) - parseFloat(hero.attr('x'));
+      var yDiff = parseFloat(enemy.attr('y')) - parseFloat(hero.attr('cy'));
+      var xDiff = parseFloat(enemy.attr('x')) - parseFloat(hero.attr('cx'));
       var separation = Math.sqrt( Math.pow(xDiff,2) + Math.pow(yDiff,2))
       if(separation < 30){
         if(score.highScore < score.currentScore){
