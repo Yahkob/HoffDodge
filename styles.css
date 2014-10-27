@@ -3,6 +3,7 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 .board{
-  background-image:url('http://fc09.deviantart.net/fs50/i/2009/314/d/f/Checkerboard_Stage_2_by_eliskan_stock.jpg');
+  background-image:url('http://www.aniagrycan.com/wp-content/uploads/2013/07/fractal-patterns-c8.jpg');
+  border: 2px dotted teal;
 }
 
