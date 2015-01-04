@@ -12,7 +12,7 @@ $(document).ready(function(){
 var gameSettings = {
   height: 600,
   width: 700,
-  nEnemies: 40,
+  nEnemies: 50,
   padding: 20
 };
 
@@ -72,7 +72,7 @@ var player = board.selectAll('player').data([666]).enter().append('svg:circle')
   .attr('class','player').call(drag);
 
 setInterval(function(){
-  enemy.transition().duration(1900).attr('x',function(i){return Math.random() * 900})
+  enemy.transition().duration(1900).attr('x',function(i){return Math.random() * 1000})
   .attr('y',function(){return Math.random() * 750})
   .tween('custom', function(i,d){
     return function(t){
