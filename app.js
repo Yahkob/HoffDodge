@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
   bootbox.confirm("Are you sure you wont cry when the hoff hassels you??", function(result) {
     if(result){
       bootbox.hideAll();
