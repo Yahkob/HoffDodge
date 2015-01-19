@@ -1,5 +1,5 @@
 $(function(){
-  bootbox.confirm("Are you sure you wont cry when the hoff hassels you??", function(result) {
+  bootbox.confirm("Are you sure you wont cry when the Hoff Hassels you?!?", function(result) {
     if(result){
       bootbox.hideAll();
     }
