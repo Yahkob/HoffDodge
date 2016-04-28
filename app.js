@@ -1,14 +1,3 @@
-$(function(){
-  bootbox.confirm("Are you sure you wont cry when the Hoff Hassels you?!?", function(result) {
-    if(result){
-      bootbox.hideAll();
-    }
-    else{
-      window.location.href="http://www.queenofdiy.com/stitchery/knitting-beginners-guide.html"
-    }
-  });
-});
-
 var gameSettings = {
   height: 600,
   width: 700,
